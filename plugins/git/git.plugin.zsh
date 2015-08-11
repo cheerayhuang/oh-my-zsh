@@ -10,6 +10,16 @@ zstyle -s ":vcs_info:git:*:-all-" "command" _omz_git_git_cmd
 # Usage example: git pull origin $(current_branch)
 # Using '--quiet' with 'symbolic-ref' will not cause a fatal error (128) if
 # it's not a symbolic ref, but in a Git repo.
+function git_branch_info() {
+    branch=$(git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\ \1/')
+
+    if [ "$branch" = "" ]; then
+        echo " none"
+    else
+        echo "$branch"
+    fi
+}
+
 function current_branch() {
   local ref
   ref=$($_omz_git_git_cmd symbolic-ref --quiet HEAD 2> /dev/null)
