@@ -31,3 +31,7 @@ alias la='ls -lAh'
 # Push and pop directories on directory stack
 alias pu='pushd'
 alias po='popd'
+
+#git commands
+alias gitclean='git checkout -f && git clean -dxf'
+alias gitst='git status'
