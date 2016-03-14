@@ -2,7 +2,13 @@
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
-local user_host='%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}'
+
+if [[ $UID -eq 0 ]]; then
+    local user_host='%{$terminfo[bold]$fg[red]%}%n@%m%{$reset_color%}'
+else
+    local user_host='%{$terminfo[bold]$fg[green]%}%n@%m%{$reset_color%}'
+fi
+
 local current_dir='%{$terminfo[bold]$fg[blue]%} %~%{$reset_color%}'
 local rvm_ruby=''
 if which rvm-prompt &> /dev/null; then
